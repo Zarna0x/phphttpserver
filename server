@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+
+<?php
+
+use Zarna0x\WebServer\Request;
+use Zarna0x\WebServer\Response;
+use Zarna0x\WebServer\Server;
+
+
+array_shift( $argv );
+
+
+// Set server port
+$port = ( empty( $argv ) ) ? 80 : (int) array_shift( $argv );
+
+$message = empty( $argv ) ? 'prastoi mesiji' : array_shift( $argv ) ;
+
+require_once 'vendor/autoload.php';
+
+
+$WebServer = new Server('127.0.0.1',(int)$port);
+
+$WebServer->listen(function( $request ) use ($message){
+  if ( $request instanceof Request ) {
+      return new Response("<h1>Hello Dearci</h1>");
+   }
+});
+//var_dump($WebServer->makeSocket());
+// // create a new server instance
+// $server = new Server( '127.0.0.1', $port );
+
+// // start listening
+// $server->listen( function( Request $request ) 
+// {
+//     return new Response( 'Hello Dude' );
+// });
